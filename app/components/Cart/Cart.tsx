@@ -2,59 +2,26 @@ import React, { useState, useEffect } from "react";
 import "./Cart.css";
 import CloseIcon from "../../../public/assets/close.svg";
 import Image from "next/image";
+import useCartFunctions from "./CartController";
 
 interface CartProps {
-  onClose: ()=>void
+  onClose: () => void;
 }
 
 const Cart: React.FC<CartProps> = ({ onClose }) => {
   const [cartItems, setCartItems] = useState<any[]>([]);
+  const { updateCartItemQuantity, displayQuantity, calculatePriceInRow, calculateTotalPrice, calculateTotalQuantity } = useCartFunctions(cartItems);
 
   useEffect(() => {
     const existingCartItems = localStorage.getItem("cartItems");
-    const initialCartItems = existingCartItems
-      ? JSON.parse(existingCartItems)
-      : [];
+    const initialCartItems = existingCartItems ? JSON.parse(existingCartItems) : [];
     setCartItems(initialCartItems);
   }, []);
 
-  const updateCartItemQuantity = (itemId: string, quantityChange: number) => {
-    const updatedCartItems = cartItems
-      .map((item: any) => {
-        if (item.id === itemId) {
-          const updatedQuantity = item.quantity + quantityChange;
-          if (updatedQuantity <= 0) return null;
-          return { ...item, quantity: updatedQuantity };
-        }
-        return item;
-      })
-      .filter((item: any) => item !== null);
-
+  const handleUpdateCartItemQuantity = (itemId: string, quantityChange: number) => {
+    const updatedCartItems = updateCartItemQuantity(itemId, quantityChange);
     setCartItems(updatedCartItems);
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-  };
-
-  const displayQuantity = (itemId: string) => {
-    const item = cartItems.find((obj: any) => obj.id === itemId);
-    return item ? item.quantity : 0;
-  };
-
-  const calCulatePriceInRow = (itemId: string) => {
-    const item = cartItems.find((obj: any) => obj.id === itemId);
-    return item ? item.quantity * item.cardmarket.prices.averageSellPrice : 0;
-  };
-
-
-  const calculateTotalPrice = () => {
-    return cartItems.reduce((totalPrice, item) => {
-      return totalPrice + (item.quantity * item.cardmarket.prices.averageSellPrice);
-    }, 0);
-  };
-
-  const calculateTotalQuantity = () => {
-    return cartItems.reduce((totalAmount, item) => {
-      return totalAmount + item.quantity ;
-    }, 0);
   };
 
   const clearAll = () => {
@@ -99,20 +66,20 @@ const Cart: React.FC<CartProps> = ({ onClose }) => {
               <br></br>${card.cardmarket.prices.averageSellPrice}
             </li>
             <li key={card.id} className="column column3">
-              ${calCulatePriceInRow(card.id)}
+              ${calculatePriceInRow(card.id)}
             </li>
           </ul>
           <ul className="item-list-btn">
             <li
               className="column column1 btn1"
-              onClick={() => updateCartItemQuantity(card.id, -1)}
+              onClick={() => handleUpdateCartItemQuantity(card.id, -1)}
             >
               -
             </li>
             <li className="column column2 btn2">{displayQuantity(card.id)}</li>
             <li
               className="column column3 btn3"
-              onClick={() => updateCartItemQuantity(card.id, +1)}
+              onClick={() => handleUpdateCartItemQuantity(card.id, +1)}
             >
               +
             </li>
@@ -129,7 +96,7 @@ const Cart: React.FC<CartProps> = ({ onClose }) => {
         <div className="small-title">Total price</div>
           <div>${calculateTotalPrice()}</div>
         </div>
-        <button className="checkout-btn">Checkout</button>
+        <button className="checkout-btn">Continue to Payment</button>
       </div>
     </div>
   );

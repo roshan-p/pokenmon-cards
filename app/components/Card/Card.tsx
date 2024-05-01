@@ -4,7 +4,7 @@ import "./Card.css";
 import ShoppingBag from "../../../public/assets/shopping-bag.svg";
 import Ellipse from "../../../public/assets/ellipse.svg";
 
-interface CardProps {
+interface ICardProps {
   id: string;
   name: string;
   imageUrl: string;
@@ -13,7 +13,7 @@ interface CardProps {
   addToCart: ()=>void
 }
 
-const Card: React.FC<CardProps> = ({ id, name, imageUrl, price, quantity, addToCart }) => {
+const Card: React.FC<ICardProps> = ({ id, name, imageUrl, price, quantity, addToCart }) => {
   return (
     <div key={id} className="card">
       <div className="card-details">

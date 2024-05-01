@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
-import axios from "axios";
-import "./HomePage.css";
+import axios from "axios"; 
+import "./HomePage.css"; 
 import Card from "../Card/Card";
 import { IHomepageProps, ICard } from "../interface";
 
@@ -45,14 +45,14 @@ const HomePage: React.FC<IHomepageProps> = ({
           "https://api.pokemontcg.io/v2/cards",
           {
             params: {
-              pageSize: 20,
-              page: currentPage,
+              pageSize: 20, 
+              page: currentPage, 
             },
           }
         );
 
         const totalCount = response.data.totalCount;
-        const totalPages = Math.ceil(totalCount / 20);
+        const totalPages = Math.ceil(totalCount / 20); 
         setIsLoading(false);
         setTotalPages(totalPages);
         setCardData(response.data.data);
@@ -217,31 +217,31 @@ const HomePage: React.FC<IHomepageProps> = ({
     cartItems.push(newItem);
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   };
-  const filterSet = (value: string) => {
-    if (!value) {
-      setDisplayCard(cardData);
+  const filterSet = (value:string) => {
+    if(!value){
+      setDisplayCard(cardData)
       return;
     }
-    const newItem = cardData.filter((item: any) => item.set.id === value);
-    console.log(newItem);
-    setDisplayCard(newItem);
+    const newItem = cardData.filter((item:any) => item.set.id === value);
+    console.log(newItem)
+    setDisplayCard(newItem)
   };
-  const filterType = (value: string) => {
-    if (!value) {
-      setDisplayCard(cardData);
+  const filterType = (value:string) => {
+    if(!value){
+      setDisplayCard(cardData)
       return;
     }
-    const newItem = cardData.filter((item: any) => item.types.includes(value));
-    console.log(newItem);
-    setDisplayCard(newItem);
+    const newItem = cardData.filter((item:any) => item.types.includes(value));
+    console.log(newItem)
+    setDisplayCard(newItem)
   };
-  const filterRariry = (value: string) => {
-    if (!value) {
-      setDisplayCard(cardData);
+  const filterRariry = (value:string) => {
+    if(!value){
+      setDisplayCard(cardData)
       return;
     }
-    const newItem = cardData.filter((item: any) => item.rarity === value);
-    setDisplayCard(newItem);
+    const newItem = cardData.filter((item:any) => item.rarity === value);
+    setDisplayCard(newItem)
   };
   return (
     <div className="homepage-container">
@@ -251,12 +251,7 @@ const HomePage: React.FC<IHomepageProps> = ({
             <div className="card-list-title">Choose Card</div>
             <div className="selector-wrapper">
               <div className="set-selector-wrapper">
-                <select
-                  className="set-selector"
-                  onChange={(e) => {
-                    filterSet(e.target.value);
-                  }}
-                >
+                <select className="set-selector" onChange={(e)=>{filterSet(e.target.value)}}>
                   <option value="">Set</option>
                   {sets.map((set) => (
                     <option key={set.id} value={set.id}>
@@ -266,12 +261,7 @@ const HomePage: React.FC<IHomepageProps> = ({
                 </select>
               </div>
               <div className="rariry-selector-wrapper">
-                <select
-                  className="rariry-selector"
-                  onChange={(e) => {
-                    filterRariry(e.target.value);
-                  }}
-                >
+                <select className="rariry-selector"  onChange={(e)=>{filterRariry(e.target.value)}}>
                   <option value="">Rarity</option>
                   {rarities.map((rarity) => (
                     <option key={rarity} value={rarity}>
@@ -281,12 +271,7 @@ const HomePage: React.FC<IHomepageProps> = ({
                 </select>
               </div>
               <div className="type-selector-wrapper">
-                <select
-                  className="type-selector"
-                  onChange={(e) => {
-                    filterType(e.target.value);
-                  }}
-                >
+                <select className="type-selector"  onChange={(e)=>{filterType(e.target.value)}}>
                   <option value="">Type</option>
                   {types.map((type) => (
                     <option key={type} value={type}>
