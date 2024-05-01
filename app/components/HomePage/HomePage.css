@@ -1,0 +1,114 @@
+/* Homepage.css */
+
+.homepage-container {
+  width: 1136px;
+  margin: 0 auto;
+  /* Centering horizontally */
+  display: flex;
+  justify-content: center;
+  /* Centering vertically */
+  align-items: center;
+  /* Centering vertically */
+  overflow: auto;
+}
+
+.homepage {
+  width: 100%;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(176px, 1fr));
+  grid-gap: 8px;
+}
+
+.selector-wrapper {
+  display: flex;
+  width: 308px;
+  justify-content: space-between;
+  margin-left: auto;
+}
+
+.pagination {
+  margin: 20px;
+  text-align: center;
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pagination button:hover {
+  background-color: rgba(31, 29, 43, 1);
+}
+
+.pagination button.active {
+  background-color: rgba(31, 29, 43, 1);
+}
+
+select {
+  background: transparent;
+}
+
+.set-selector {
+  width: 100%;
+}
+
+.set-selector-wrapper {
+  width: 82px;
+  height: 36px;
+  padding: 8px 16px 8px 16px;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px;
+  background: rgba(31, 29, 43, 1) !important;
+}
+
+.rariry-selector {
+  width: 100%;
+}
+
+.rariry-selector-wrapper {
+  width: 100px;
+  height: 36px;
+  padding: 8px 16px 8px 16px;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px;
+  background: rgba(31, 29, 43, 1) !important;
+}
+
+.type-selector {
+  width: 100%;
+}
+
+.type-selector-wrapper {
+  width: 94px;
+  height: 36px;
+  padding: 8px 16px 8px 16px;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px;
+  background: rgba(31, 29, 43, 1) !important;
+}
+
+.card-list-header {
+  display: flex;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+.card-list-title{
+  font-family: Poppins Latin;
+font-size: 18px;
+font-weight: 600;
+line-height: 25.2px;
+text-align: left;
+
+}
